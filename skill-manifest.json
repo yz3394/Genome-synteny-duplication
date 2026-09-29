@@ -1,0 +1,70 @@
+{
+  "files": {
+    "SKILL.md": {
+      "bytes": 5909,
+      "sha256": "1851897f70eb5b679d71fabf375ce0d6bcd9bda6f65c39fb153adce6385a9946"
+    },
+    "agents/openai.yaml": {
+      "bytes": 327,
+      "sha256": "90463f783a20f1dbe00e705c87b7dff2f5eb1b6505abc57eb5ed56437babc94d"
+    },
+    "assets/analysis_config.example.json": {
+      "bytes": 1413,
+      "sha256": "b7e3fe8e435daee2a8c4e51511938d9102b1ed8ce1226ecad7dedfaf9dbb589b"
+    },
+    "references/coffee-regression.md": {
+      "bytes": 6193,
+      "sha256": "dc92fd57d0456b9032ec14a3e7e58c532691b3b516b42997cb5c492323e4c49c"
+    },
+    "references/figures-and-qa.md": {
+      "bytes": 6312,
+      "sha256": "180fbc5fd6d3fce69bada20f25d3f37eca7a1b910b98cfba294e2695887df155"
+    },
+    "references/inputs-and-evidence.md": {
+      "bytes": 5858,
+      "sha256": "b37b67bb82c0a0f36497b29104894685c8cc7e329a4b00534de74e06bbf8ffce"
+    },
+    "references/methods-and-parameters.md": {
+      "bytes": 5503,
+      "sha256": "4d03f7900b39a8795749d2e53d342405e19908453fe81cd6ca5ad3c705821425"
+    },
+    "scripts/render_figures.py": {
+      "bytes": 46410,
+      "sha256": "045305be62ff78d181e1618eb898989fa5cde1abc2fb712658a87f53a3220039"
+    },
+    "scripts/synteny_evidence.py": {
+      "bytes": 33833,
+      "sha256": "42980611d1490325a258b1262899acbafa10f066465f15f00107cb5059db3120"
+    },
+    "scripts/synteny_inputs.py": {
+      "bytes": 32400,
+      "sha256": "1e7d1bf66789535c98549b335253f8cb76d3d8ceeca6fadaaa8e8d2ae2d947a6"
+    },
+    "scripts/synteny_workflow.py": {
+      "bytes": 22716,
+      "sha256": "8a5e40454dda7cf579c4f72480ec7e40f26825e796412142b330267e8050e6f1"
+    },
+    "tests/test_engine_smoke.py": {
+      "bytes": 8012,
+      "sha256": "b80e3b4196a8db7f102a14aa180f69a6e59407d392dca6b0cd566a942b33dba0"
+    },
+    "tests/test_evidence.py": {
+      "bytes": 13466,
+      "sha256": "9ae381b3938dde6ad10494f028f421e4b5edfd519ffd764c8cc7d286fee10a7b"
+    },
+    "tests/test_figures.py": {
+      "bytes": 7769,
+      "sha256": "651a2630ad8439e130e25e3bf0274fee6506c8ddc3a5faedfd6d5cab5d0d48c3"
+    },
+    "tests/test_inputs.py": {
+      "bytes": 13515,
+      "sha256": "7b5a61fcdd9266a4dda9024eb8844951a91a5c332012caf10526a00356cbdf53"
+    },
+    "tests/test_workflow.py": {
+      "bytes": 3909,
+      "sha256": "2842608a627487722be0ede2d8f6f6e6a9b5a5d05a08806e995e19d2f77ab398"
+    }
+  },
+  "skill": "genome-synteny-duplication",
+  "version": "1.0.0"
+}
