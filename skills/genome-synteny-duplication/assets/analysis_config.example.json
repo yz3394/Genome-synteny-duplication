@@ -1,0 +1,65 @@
+{
+  "output_dir": "results",
+  "genomes": [
+    {
+      "id": "A",
+      "species": "Species A",
+      "assembly_id": "assembly-release-A",
+      "annotation_id": "annotation-release-A",
+      "gff": "input/A.gff3",
+      "proteins": "input/A.proteins.faa",
+      "assembly_fasta": "input/A.genome.fna",
+      "rank_policy": "protein_coding"
+    },
+    {
+      "id": "B",
+      "species": "Species B",
+      "assembly_id": "assembly-release-B",
+      "annotation_id": "annotation-release-B",
+      "gff": "input/B.gff3",
+      "proteins": "input/B.proteins.faa",
+      "assembly_fasta": "input/B.genome.fna",
+      "rank_policy": "protein_coding"
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "A_self",
+      "a": "A",
+      "b": "A",
+      "kind": "intragenome"
+    },
+    {
+      "id": "A_B",
+      "a": "A",
+      "b": "B",
+      "kind": "interspecies"
+    }
+  ],
+  "search": {
+    "engine": "diamond",
+    "sensitivity": "sensitive",
+    "evalue": 1e-05,
+    "max_target_seqs": 50,
+    "threads": 4
+  },
+  "collinearity": {
+    "top_k": 5,
+    "min_anchors": 5,
+    "max_gaps": 25,
+    "overlap_window": 5,
+    "block_evalue": 1e-05,
+    "match_score": 50,
+    "gap_penalty": -1
+  },
+  "duplication": {
+    "proximal_max_intervening": 8,
+    "classifier_n": 10
+  },
+  "tools": {
+    "diamond": "diamond",
+    "blastp": "blastp",
+    "mcscanx": "MCScanX",
+    "classifier": "duplicate_gene_classifier"
+  }
+}
