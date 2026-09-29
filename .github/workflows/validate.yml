@@ -1,0 +1,29 @@
+name: Validate Skill
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  portable-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install matplotlib pillow
+      - name: Unit tests (native MCScanX tests require a separately installed engine)
+        working-directory: skills/genome-synteny-duplication
+        env:
+          MPLBACKEND: Agg
+        run: python -m unittest discover -s tests -v
+      - name: Verify published file hashes
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('skills/genome-synteny-duplication')
+          manifest = json.loads(Path('skill-manifest.json').read_text())
+          actual = {p.relative_to(root).as_posix(): {'sha256': hashlib.sha256(p.read_bytes()).hexdigest(), 'bytes': p.stat().st_size} for p in root.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+          assert actual == manifest['files'], 'Skill files differ from published manifest'
+          print('All published Skill hashes match')
+          PY
