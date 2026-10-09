@@ -1,49 +1,49 @@
-# 本地 Skill 与 GitHub 同步约定
+# Local skill and GitHub synchronization
 
-## 授权与范围
+## Authorization and scope
 
-仓库所有者已明确授权：上传当前 Skill，并在未来本地版本更新时同步更新这个 GitHub 仓库。
+The current version has been published. The user subsequently cancelled hourly update checks and requires an explicit request before future GitHub updates. Each subsequent synchronization requires a new explicit request; local skill edits alone do not trigger checks or uploads.
 
-- **本地来源**：`~/.codex/skills/genome-synteny-duplication/`。
-- **仓库目标目录**：`skills/genome-synteny-duplication/`。
-- **唯一远程目标**：`https://github.com/yz3394/Genome-synteny-duplication.git`。
-- **方向**：本地已安装 Skill → 本仓库；不自动将远程内容反向覆盖本地安装版本。
+- **Local source:** `~/.codex/skills/genome-synteny-duplication/`.
+- **Repository destination:** `skills/genome-synteny-duplication/`.
+- **Only remote target:** `https://github.com/yz3394/Genome-synteny-duplication.git`.
+- **Direction:** installed local skill → this repository; do not automatically overwrite the local installation with remote content.
 
-同步仅涉及上述 Skill 目录及其打包清单。README、维护文档、仓库配置和同步工具不从本地 Skill 目录复制；需要调整时单独审阅。不得将相邻研究项目的原始数据、分析结果、运行日志、临时文件、凭据或私人链接打包上传。Skill 内现有的汇总验证说明属于包内文档。
+Synchronization covers only the skill directory above and its package manifest. The README, maintenance documentation, repository configuration and synchronization tools are not copied from the local skill directory; review any changes to them separately. Do not package or upload raw data, analysis outputs, run logs, temporary files, credentials or private links from neighboring research projects. Existing validation summaries within the skill are package documentation.
 
-## 定期检查的运行条件
+## Manual initiation
 
-使用附属于原 Codex 会话的 heartbeat，按每小时检查本地版本。运行依赖本地 Codex 执行环境、源目录、Git 工作副本、网络和 GitHub 认证可用；不保证计算机关闭、休眠或执行环境不可用时仍按时运行。
+The former hourly heartbeat `skill-github` has been deleted. No periodic update checks are scheduled.
 
-无变化时保持安静，不创建空提交。完成实际同步，或发生失败、冲突及需要用户处理的情况时通知。检查计划与 GitHub 推送结果应分别确认；创建定期检查不代表后续每次推送已经成功。
+Validate and synchronize using the steps below only when the user explicitly requests a GitHub update or an equivalent action. Routine analysis or local skill editing does not trigger publication. On completion, report the actual commit and remote verification results. On failure, explain the specific cause and retain local changes.
 
-## 同步步骤
+## Synchronization steps
 
-1. 核对本地来源、工作副本和远程地址；读取当前 Git 状态。不得把来源不明或其他任务尚未完成的工作区改动混入同步提交。
-2. 获取远程状态，检查历史是否发生变化。远程独有修改、分叉历史或与本地包冲突的改动必须停止自动覆盖并报告，待审阅解决。
-3. 比较来源与仓库包的内容，检查新增、修改和移除文件是否属于 Skill 范围；审阅是否包含敏感内容或研究数据。
-4. 运行同步工具，准备仓库副本和 SHA256 打包清单，并执行其验证。随后审阅实际 Git diff，确认变更与本地更新相符。
-5. 对此次修改运行相关测试，记录已执行检查及明确跳过的检查。脚本结构、引用、内容范围或测试验证失败时停止提交与推送。
-6. 仅提交本次审核过的包和清单变更，再正常推送到指定仓库。不得使用强制推送，不得自动创建、移动或删除标签。
-7. 读取远程状态，确认远程分支的提交与本地目标提交一致后，才能报告 GitHub 同步完成。推送失败时保留本地改动和提交，明确说明尚未同步。
+1. Verify the local source, working copy and remote URL, and inspect the current Git status. Do not include changes of unknown origin or unfinished work from other tasks in the synchronization commit.
+2. Fetch the remote state and inspect history for changes. If there are remote-only edits, diverged histories or changes that conflict with the local package, stop automatic overwriting and report the issue for review and resolution.
+3. Compare the source with the repository package. Check that added, modified and removed files are within the skill's scope, and review them for sensitive content or research data.
+4. Run the synchronization tool to prepare the repository copy and SHA256 package manifest and execute its validation. Then review the actual Git diff and confirm that it matches the local updates.
+5. Run tests relevant to the changes and record both completed checks and explicit skips. Stop before committing or pushing if script structure, references, content scope or tests fail validation.
+6. Commit only the reviewed package and manifest changes, then push normally to the designated repository. Do not force-push or automatically create, move or delete tags.
+7. Read the remote state. Report successful GitHub synchronization only after confirming that the remote branch points to the intended local commit. If pushing fails, retain local changes and commits and state clearly that synchronization is incomplete.
 
-## 同步工具
+## Synchronization tool
 
-在仓库根目录执行：
+Run from the repository root:
 
 ```bash
 python3 tools/sync_installed_skill.py --source "$HOME/.codex/skills/genome-synteny-duplication" --check
 python3 tools/sync_installed_skill.py --source "$HOME/.codex/skills/genome-synteny-duplication"
 ```
 
-`--check` 用于检查来源与仓库包的状态；不带 `--check` 时准备并验证仓库内的包副本。**脚本不执行 GitHub 推送。** Git 提交和推送由执行任务的代理在检查通过、审阅差异并确认远程无冲突后分别执行。
+`--check` compares the source and repository package; without `--check`, the tool prepares and validates the package copy in the repository. **The script does not push to GitHub.** The agent performing the task executes the Git commit and push separately after validation passes, the diff has been reviewed and the remote has been checked for conflicts.
 
-SHA256 清单记录包内文件的内容，用于核对复制结果和识别变化。哈希一致只证明内容一致；不能替代敏感内容检查、科学方法审阅或运行验证。
+The SHA256 manifest records package file contents to verify copying and detect changes. Matching hashes establish content identity only; they do not replace sensitive-content checks, scientific-method review or execution-based validation.
 
-## 保留与冲突处理
+## Preservation and conflict handling
 
-- 本地安装 Skill 是同步来源；保存其更新，不因远程版本不同而自动回退。
-- Git 中已有版本保留在提交历史中；不重写历史，不以删除工作副本来解决冲突。
-- 对无来源说明的文件移除或大范围变更先检查；包中移除应与本地实际更新及审阅结果一致。
-- 不输出认证令牌，不把认证材料写入配置、日志或提交；使用现有 GitHub 认证机制。
-- 需要变更同步方向、目标仓库或扩展到其他数据目录时，应取得新的明确授权。
+- The installed local skill is the synchronization source. Preserve its updates; do not automatically revert it because the remote version differs.
+- Existing versions remain in Git history. Do not rewrite history or resolve conflicts by deleting the working copy.
+- Inspect unexplained file removals or extensive changes first. Package removals must match the actual local updates and reviewed changes.
+- Do not expose authentication tokens or write credentials to configuration, logs or commits. Use the existing GitHub authentication mechanism.
+- Obtain new explicit authorization before changing the synchronization direction or target repository, or expanding the scope to other data directories.

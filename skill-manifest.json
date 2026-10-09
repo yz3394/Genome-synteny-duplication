@@ -1,12 +1,12 @@
 {
   "files": {
     "SKILL.md": {
-      "bytes": 5909,
-      "sha256": "1851897f70eb5b679d71fabf375ce0d6bcd9bda6f65c39fb153adce6385a9946"
+      "bytes": 5944,
+      "sha256": "b8cb0f7d53418b41cb30962718daba2469d2c93a4c6588261b61f3d4a40cc97b"
     },
     "agents/openai.yaml": {
-      "bytes": 327,
-      "sha256": "90463f783a20f1dbe00e705c87b7dff2f5eb1b6505abc57eb5ed56437babc94d"
+      "bytes": 337,
+      "sha256": "d32d4021316d88fad201df7796ff1fb6b5b1417b91f3b527f02004f45184a79c"
     },
     "assets/analysis_config.example.json": {
       "bytes": 1413,
