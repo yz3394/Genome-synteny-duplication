@@ -1,6 +1,6 @@
 ---
 name: genome-synteny-duplication
-description: 分析注释基因组内部串联与共线性重复、亚基因组或物种间共线性，并叠加关注家族及生成可追溯的科学图。Use for tandem duplication, WGD/segmental candidates, gene-level synteny and family-focused chromosome plots; consumes validated family lists rather than identifying enzyme function.
+description: Analyze tandem and collinear duplication within annotated genomes and synteny across subgenomes or species, overlay focal gene families and generate traceable scientific figures. Use for tandem duplication, WGD/segmental candidates, gene-level synteny and family-focused chromosome plots; consumes validated family lists rather than identifying enzyme function.
 metadata:
   version: 1.0.0
 ---
