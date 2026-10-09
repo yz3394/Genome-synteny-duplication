@@ -1,4 +1,4 @@
 interface:
-  display_name: "基因组共线性与复制分析"
-  short_description: "基因组内外共线性、串联复制、家族叠加和可追溯的科学可视化"
-  default_prompt: "使用 $genome-synteny-duplication 分析这套注释基因组及关注家族，保留原始 ID 并交付复制证据和共线性图。"
+  display_name: "Genome Synteny and Duplication"
+  short_description: "Synteny, tandem duplication, family overlays and traceable plots"
+  default_prompt: "Use $genome-synteny-duplication to analyze these annotated genomes and focal gene families, preserve original IDs, and deliver duplication evidence and synteny figures."
